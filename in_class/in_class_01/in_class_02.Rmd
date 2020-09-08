@@ -211,7 +211,8 @@ What's wrong with this code?
 
 ```{r}
 arcos_wv_mingo_trimmed <- arcos_wv_mingo %>%
-  select(buer_dea_no)
+  select(buyer_dea_no)
+#-- the word buyer was spelt without the y, but now the code runs 
 ```
 
 ## Exercise
@@ -222,4 +223,28 @@ Create as many codeblocks below as you need to.  Your task is to read in the dat
 
 You'll go into breakout rooms to do this. 
 
+```{r}
+arcos_md_mingo <- read_csv("data/arcos-md-baltimore-city-24510-pharmacy.csv")
+```
 
+```{r}
+arcos_md_mingo
+```
+```{r}
+#selecting columns in the order you want it to be in the table
+arcos_md_mingo_trimmed <- arcos_md_mingo %>%
+  select(buyer_dea_no, buyer_name, buyer_city, total_dosage_unit, total_records)
+
+#sorting the total shipment
+arcos_md_mingo_sorted <- arcos_md_mingo_trimmed %>%
+  arrange(desc(total_records))
+
+#sorting the total pills
+arcos_md_mingo_sorted <- arcos_md_mingo_trimmed %>%
+  arrange(desc(total_dosage_unit))
+
+#print the sorted table
+arcos_md_mingo_sorted
+```
+Most total shipments: Newcare Home Health Services
+Most pills: Giant Pharmacy 166 (Used environment tab to open table and sort the data to find this one)
