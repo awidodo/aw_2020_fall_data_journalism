@@ -127,7 +127,7 @@ The data we'll load has a row for each pharmacy in Mingo County, West Virginia. 
 
 ```{r}
 # Read in data for Mingo, WV
-arcos_wv_mingo <- read_csv("data/arcos-wv-mingo-54059-pharmacy.csv")
+arcos_wv_mingo <- read_csv("arcos-wv-mingo-54059-pharmacy.csv")
 
 ```
 **Details in Video**: More detail on what the code above is doing, in English; a few other details about loading data in general; and some additional information about this specific data set we're loading. (My notes: Review column names; Object Names could be anything; cleaning up environment; folder path matters; Restart R and try to load; show how to reload tidyverse and how to debug)
@@ -245,6 +245,7 @@ We can also store this as a new object called "arcos_wv_mingo_pharmacies", which
 arcos_wv_mingo_pharmacies <- arcos_wv_mingo %>%
   select(buyer_name)
 
+arcos_wv_mingo_pharmacies
 ```
 
 **Details in Video**: I'll breakdown what the code above does and show you some details about creating objects.  (My notes: Show storing object doesn't overwrite original data. Show how to overwrite the original data, then go back up and read it in again)
@@ -253,7 +254,7 @@ arcos_wv_mingo_pharmacies <- arcos_wv_mingo %>%
 
 ```{r}
 
-arcos_md_baltimorecity_pharmacies <- arcos_md_baltimore %>%
+arcos_md_baltimorecity_pharmacies <- acros_md_baltimorecity %>%
   select(buyer_name)
 
 arcos_md_baltimorecity_pharmacies
@@ -274,6 +275,8 @@ The following code selects the last five columns of our Mingo, WV data and store
 arcos_wv_mingo_trimmed <- arcos_wv_mingo %>%
   select(buyer_dea_no, buyer_name, buyer_city, total_dosage_unit, total_records)
 
+arcos_wv_mingo_trimmed
+
 ```
 
 **Details in Video**: A review of what the code above does.  
@@ -289,6 +292,7 @@ The following code selects the last five columns of our Mingo, WV data and store
 arcos_wv_mingo_trimmed <- arcos_wv_mingo %>%
   select(buyer_name, buyer_dea_no, buyer_city, total_dosage_unit, total_records)
 
+
 ```
 
 **Details in Video**: I'll show you how the columns have been re-ordered, and also what happened when we reuse an object name. I'll also show you an alternative way of selecting the same five columns by excluding the first two columns.  (My notes: show all that)
@@ -299,7 +303,7 @@ There's a lot more we can do with `select()`, but that's enough to get started. 
 
 ```{r}
 
-arcos_md_baltimorecity_trimmed <- arcos_md_baltimore %>%
+arcos_md_baltimorecity_trimmed <- acros_md_baltimorecity %>%
   select(buyer_name, buyer_dea_no, buyer_city, total_dosage_unit, total_records)
 
 ```
@@ -370,10 +374,12 @@ arcos_wv_mingo_sorted <- arcos_wv_mingo_trimmed %>%
 **Task (Write Code and Run It)**: Now it's your turn. Write the code below to answer the question: "Which pharmacy in Baltimore City, Maryland had the most pills sent to it between 2006 and 2014?" Hint: use the arcos_md_baltimorecity_trimmed dataframe as a starting point to answer this question.
 
 ```{r}
-arcos_md_baltimorecity_sorted  <- arcos_md_baltimorecity_trimmed %>%
-  arrange(total_dosage_unit)
+arcos_md_baltimorecity_sorted <- arcos_md_baltimorecity_trimmed %>%
+  arrange(desc(total_dosage_unit))
 
-arcos_md_baltimore_sorted
+arcos_md_baltimorecity_sorted
+
+#Answer: Newcare Home Health Services with 6133600 total pills
 
 ```
 
@@ -414,7 +420,7 @@ arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
 
 arcos_md_baltimore_sorted_trimmed
 
-# Giant Pharmacy 10365 total shipments
+#Answer: Giant Pharmacy 10365 total shipments
 ```
 
 **Task (Write Code and Run It)**: 2. In Baltimore City, which pharmacy got the smallest number of pills between 2006 and 2014? How many pills did it get?  Hint: the total_dosage_unit column reflects the number of pills.
@@ -428,7 +434,7 @@ arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
 
 arcos_md_baltimore_sorted_trimmed
 
-#Oshinshky, Alan E MD and Jakobovits, Julian MD both got 4 number of pills
+#Answer: Oshinshky, Alan E MD and Jakobovits, Julian MD both got 4 number of pills
 ```
 
 ## You're Done
