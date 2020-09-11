@@ -192,7 +192,7 @@ arcos_wv_mingo
 **Task (Write Code and Run It)**: Now it's your turn. In the empty codeblock below, display the Baltimore data in the markdown document. 
 
 ```{r}
-
+acros_md_baltimorecity
 ```
 
 ### Option 3: open the data from the environment window
@@ -253,7 +253,10 @@ arcos_wv_mingo_pharmacies <- arcos_wv_mingo %>%
 
 ```{r}
 
+arcos_md_baltimorecity_pharmacies <- arcos_md_baltimore %>%
+  select(buyer_name)
 
+arcos_md_baltimorecity_pharmacies
 ```
 
 **Details in Video**: I'll show you how to complete the task above. 
@@ -296,6 +299,8 @@ There's a lot more we can do with `select()`, but that's enough to get started. 
 
 ```{r}
 
+arcos_md_baltimorecity_trimmed <- arcos_md_baltimore %>%
+  select(buyer_name, buyer_dea_no, buyer_city, total_dosage_unit, total_records)
 
 ```
 
@@ -365,7 +370,10 @@ arcos_wv_mingo_sorted <- arcos_wv_mingo_trimmed %>%
 **Task (Write Code and Run It)**: Now it's your turn. Write the code below to answer the question: "Which pharmacy in Baltimore City, Maryland had the most pills sent to it between 2006 and 2014?" Hint: use the arcos_md_baltimorecity_trimmed dataframe as a starting point to answer this question.
 
 ```{r}
+arcos_md_baltimorecity_sorted  <- arcos_md_baltimorecity_trimmed %>%
+  arrange(total_dosage_unit)
 
+arcos_md_baltimore_sorted
 
 ```
 
@@ -400,7 +408,13 @@ Answer the question below by writing code in the empty codeblock.  Edit the comm
 
 ```{r}
 # Answer to question 1: 
+arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
+  select(buyer_dea_no, buyer_name, buyer_city, total_dosage_unit, total_records) %>%
+  arrange(desc(total_records))
 
+arcos_md_baltimore_sorted_trimmed
+
+# Giant Pharmacy 10365 total shipments
 ```
 
 **Task (Write Code and Run It)**: 2. In Baltimore City, which pharmacy got the smallest number of pills between 2006 and 2014? How many pills did it get?  Hint: the total_dosage_unit column reflects the number of pills.
@@ -408,6 +422,13 @@ Answer the question below by writing code in the empty codeblock.  Edit the comm
 ```{r}
 # Answer to question 2: 
 
+arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
+  select(buyer_dea_no, buyer_name, buyer_city, total_dosage_unit, total_records) %>%
+  arrange(total_dosage_unit)
+
+arcos_md_baltimore_sorted_trimmed
+
+#Oshinshky, Alan E MD and Jakobovits, Julian MD both got 4 number of pills
 ```
 
 ## You're Done
