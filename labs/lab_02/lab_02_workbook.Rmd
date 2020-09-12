@@ -127,7 +127,7 @@ The data we'll load has a row for each pharmacy in Mingo County, West Virginia. 
 
 ```{r}
 # Read in data for Mingo, WV
-arcos_wv_mingo <- read_csv("arcos-wv-mingo-54059-pharmacy.csv")
+arcos_wv_mingo <- read_csv("data/arcos-wv-mingo-54059-pharmacy.csv")
 
 ```
 **Details in Video**: More detail on what the code above is doing, in English; a few other details about loading data in general; and some additional information about this specific data set we're loading. (My notes: Review column names; Object Names could be anything; cleaning up environment; folder path matters; Restart R and try to load; show how to reload tidyverse and how to debug)
@@ -146,7 +146,7 @@ Here are some great resources for getting help with loading data using readr.
 In the empty codeblock below, read in the Baltimore data and store it as an object called acros_md_baltimorecity
 
 ```{r}
-acros_md_baltimorecity <- read_csv("arcos-md-baltimore-city-24510-pharmacy.csv")
+acros_md_baltimorecity <- read_csv("data/arcos-md-baltimore-city-24510-pharmacy.csv")
 ```
 
 **Details in Video**: I'll show you the answer, and review some common mistakes. (My notes: Show answer, show what happens if they screw up the file path) 
