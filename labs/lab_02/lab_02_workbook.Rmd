@@ -434,7 +434,10 @@ arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
 
 arcos_md_baltimore_sorted_trimmed
 
-#Answer: Oshinshky, Alan E MD and Jakobovits, Julian MD both got 4 number of pills
+#Answer: Oshinshky, Alan E MD and Jakobovits, Julian MD both got 4 number of pills. These are doctors instead of pharmacies. 
+
+
+#Answer: NIA RESEARCH PHARMACY, 100 pills
 ```
 
 ## You're Done
