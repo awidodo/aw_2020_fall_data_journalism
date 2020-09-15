@@ -420,7 +420,7 @@ arcos_md_baltimore_sorted_trimmed <- arcos_md_baltimore %>%
 
 arcos_md_baltimore_sorted_trimmed
 
-#Answer: Giant Pharmacy 10365 total shipments
+#Answer: Giant Pharmacy 166, 10365 total shipments
 ```
 
 **Task (Write Code and Run It)**: 2. In Baltimore City, which pharmacy got the smallest number of pills between 2006 and 2014? How many pills did it get?  Hint: the total_dosage_unit column reflects the number of pills.
