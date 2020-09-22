@@ -206,7 +206,7 @@ stephanie_daily_average
 
 # Write the answer in a comment
 # Q: What is the average heat index value on each day inside of Stephanie's house? Which day had the highest?
-# A: 
+# A: July 20th 2019 has the highest at 101.14
 
 
 ```
@@ -233,7 +233,7 @@ stephanie_daily_min_max
 
 # Write the answer in a comment
 # Q: During the seven day heat wave, what was the lowest recorded heat index value in Stephanie's house?  What was the highest heat index value, and on what day did it occur?
-# A: 
+# A: Lowest - 88.8 on July 16 & Highest - 115.7 on July 19
 
 
 ```
@@ -265,6 +265,12 @@ That should allow you to answer the following questions:
 
 ```{r}
 michael_daily_count <- michael_day_hourly_averages %>%
-  mutate()
+  mutate(date = date(date_hour)) %>%
+  select(date) %>%
+  filter(date >= "2019-07-16") %>%
+  filter(date <= "2019-07-22") %>%
+
+
+michael_daily_count
 ```
 
