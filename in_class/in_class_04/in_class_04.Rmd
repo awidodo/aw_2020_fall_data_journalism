@@ -257,20 +257,36 @@ Create a codeblock and write code necessary to output a **single table** that gr
 That should allow you to answer the following questions:
 
 * Q: What was the highest heat index value measured in Michael's house? On what day did it occur?
-* Q: The heat index never fell below what value during the period we measured? 
-* Q: What was the average heat index value on each day during the period measured? 
-* Q: Is there anything concerning the number of hourly readings on each day that could affect the results you're getting?
-  
--30-
-
 ```{r}
 michael_daily_count <- michael_day_hourly_averages %>%
   mutate(date = date(date_hour)) %>%
-  select(date) %>%
   filter(date >= "2019-07-16") %>%
-  filter(date <= "2019-07-22") %>%
+  filter(date <= "2019-07-22") 
 
+michael_summary <- michael_daily_count %>%
+  group_by(date) %>%
+  summarise(max_heat_index = max(mean_indoor_heat_index),
+            min_heat_index = min(mean_indoor_heat_index),
+            mean_heat_index = mean(mean_indoor_heat_index),
+            count = n())
 
-michael_daily_count
+michael_summary
+
+# 
 ```
+
+* Q: The heat index never fell below what value during the period we measured? 
+A: 96.0
+
+* Q: What was the average heat index value on each day during the period measured? 
+
+
+* Q: Is there anything concerning the number of hourly readings on each day that could affect the results you're getting?
+A: Everyday there is 24 readings done except for July 20 where there is only 17
+
+```
+
+  
+-30-
+
 
