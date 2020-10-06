@@ -103,6 +103,8 @@ Fortunately, each table shares a common field -- state -- that is populated with
 state_covid_population <- state_covid %>%
   inner_join(state_population)
 
+state_covid_population
+
 ```
 Let's examine this newly created table together, and I'll walk you through what happened.
 
@@ -114,5 +116,22 @@ Okay, now it's your turn to work together in small groups to use this newly crea
 
 *  Which state had the highest number of COVID-19 cases per 1,000 people on August 30, 2020?
 *  And while you're at it, answer this question: Which state had the lowest number of COVID-19 deaths per 1,000 people on August 30, 2020?
+
+```{r}
+state_covid_population <- state_covid %>%
+  inner_join(state_population) %>%
+  mutate(total_cases = total_cases/1000,total_deaths = total_deaths/1000)%>%
+  arrange(total_cases)
+state_covid_population
+
+#Q: Which state had the highest number of COVID-19 cases per 1,000 people on August 30, 2020?
+#A: California had 706.589 total cases per 1000 people
+
+#Q: *  And while you're at it, answer this question: Which state had the lowest number of COVID-19 deaths per 1,000 people on August 30, 2020?
+#A: Vermont had 1.608 total cases per 1000 people
+
+```
+
+
 
 -30-
