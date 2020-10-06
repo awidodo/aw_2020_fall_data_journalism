@@ -82,7 +82,7 @@ covid_county <- read_csv("data/covid_county_2020_08_30.csv")
 
 ```{r}
 
-glimpse()
+glimpse(covid_county)
 
 ```
 
@@ -108,10 +108,49 @@ We'll start with asking a series of questions about COVID-19 cases and deaths at
 We can use summarise() in combination with another function() to:
 
 * total up values, adding them up with sum()
+```{r}
+covid_county_total_cases <- covid_county %>%
+  select(cases) %>%
+  sum()
+
+covid_county_total_cases
+```
 * count the number of values, with n()
+```{r}
+covid_county_values <- covid_county %>%
+  select(cases) %>%
+  summarise(count=n())
+
+covid_county_values
+
+#3123 values for cases
+```
+
 * find the smallest value, with min()
 * find the largest value, with max()
+```{r}
+covid_county_min <- covid_county %>%
+ group_by(state) %>%
+  summarise(min_cases = min(cases)) %>%
+  arrange(min_cases)
+
+covid_county_min
+
+#Smallest value with min() is 3 for Wyoming, and 1 for individual counties
+
+covid_county_max <- covid_county %>%
+ group_by(county) %>%
+  summarise(max_cases = max(cases)) %>%
+  arrange(desc(max_cases))
+
+covid_county_max
+#Largest value with max() is 240749 for California, and 240749 for Los Angeles
+```
 * find average values, with mean()
+```{r}
+
+```
+
 
 There are other summary functions, which you [can find here](https://dplyr.tidyverse.org/reference/summarise.html).  T
 
