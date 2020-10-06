@@ -106,6 +106,17 @@ state_covid_population <- state_covid %>%
 state_covid_population
 
 ```
+```{r}
+state_covid_no_dc <- state_covid %>%
+  filter(state != "District of Columbia")
+```
+```{r}
+state_covid_no_dc_covid_population <- state_covid_no_dc %>%
+  inner_join(state_population)
+
+state_covid_no_dc_covid_population
+```
+
 Let's examine this newly created table together, and I'll walk you through what happened.
 
 Joining gets much more complicated than this.  But at its core, this is how it works.    
