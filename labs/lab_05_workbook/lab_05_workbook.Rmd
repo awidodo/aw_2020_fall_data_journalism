@@ -545,7 +545,7 @@ smallest_number_counties
 
 # Q: which state has the smallest number of counties? 
 
-# A: District of Columbia
+# A: Delaware
 
 ```
 
