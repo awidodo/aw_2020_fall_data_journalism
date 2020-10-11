@@ -154,11 +154,13 @@ If you get stuck, look back at this week's in class class assignment for a clue.
 ```{r}
 
 most_pills_per_person <- county_pills_population %>%
-  # add a line here to create a new column with pills per person AND THEN
-  # add a line here to sort the new column from highest to lowest 
+  mutate(pills_per_person = average_pills_per_year/population) %>%
+  arrange(desc(pills_per_person))
 
+most_pills_per_person
 
-# Put the answer here
+# Put the answer here 
+#A: Norton City, VA had 305.7 pills per person
 ```
 
 ## Different types of joins
