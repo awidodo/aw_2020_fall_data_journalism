@@ -61,11 +61,6 @@ fatal_shootings %>%
   summarize(Black_women = n())
 
 
-(48/5088)*100
-
-
-
-
 fatal_shootings %>%
   filter(race != "None") %>%
   group_by(race, gender) %>%
@@ -107,11 +102,25 @@ women_percent <- number_gender %>%
 women_percent
 
 ```
+```{r}
+women_percentage <- fatal_shootings %>%
+  group_by(gender) %>%
+  count() %>%
+  pivot_wider(names_from = gender , values_from = n) %>%
+  mutate(total=`F`+`M`+`NA`) %>%
+  mutate(percent_women = `F`/total*100)
+
+women_percentage
+```
 
 #Finding 4
 “Crenshaw said Black women’s deaths also may be dismissed as “collateral damage” if they are killed while police are pursuing someone else. Twenty of the 247 women were killed in that kind of situation, analysis shows. In 12 of those 20 shootings, police said the women killed were caught in crossfire or shot accidentally.”
 
 ```{r}
 
+types_of_death <- fatal_shootings %>%
+  group_by(manner_of_death) %>%
+  count()
 
+types_of_death
 ```
