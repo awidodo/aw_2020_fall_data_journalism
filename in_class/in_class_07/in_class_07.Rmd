@@ -84,7 +84,7 @@ inner_state_covid_population <- state_covid_deaths %>%
 inner_state_covid_population
 
 # Q: which states are returned by this join?
-# A: 
+# A: Delaware, Maryland, and Virginia
 ```
 
 
@@ -100,7 +100,7 @@ left_state_covid_population <- state_covid_deaths %>%
 left_state_covid_population
 
 # Q: which states are returned by this join?
-# A: 
+# A: Delaware, District of Columbia, Maryland, Virginia
 ```
 ### Right Join
 
@@ -114,7 +114,7 @@ right_state_covid_population <- state_covid_deaths %>%
 right_state_covid_population
 
 # Q: which states are returned by this join?
-# A: 
+# A: Delaware, Maryland, Virginia, Pennsylvania 
 ```
 ### Left Join -- Switch order of data frames
 
