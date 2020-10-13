@@ -88,11 +88,27 @@ fatal_shootings
 “The starkest difference between women and men is the rate: Women account for about half the population, but 4 percent of the killings.”
 
 ```{r}
-#Shows 
+#Total count of fatal police shootings
+total_fatal_police_shootings <- fatal_shootings %>%
+  count()
+total_fatal_police_shootings
+
+#Group by gender
+number_gender <- fatal_shootings %>%
+  group_by(gender) %>%
+  count()
+number_gender 
+
+#Percentage of Women 
+women_percent <- number_gender %>%
+  filter(gender=="F") %>%
+  summarise(percent = (n/sum(total_fatal_police_shootings)*100))
+
+women_percent
 
 ```
 
-##Finding 4
+#Finding 4
 “Crenshaw said Black women’s deaths also may be dismissed as “collateral damage” if they are killed while police are pursuing someone else. Twenty of the 247 women were killed in that kind of situation, analysis shows. In 12 of those 20 shootings, police said the women killed were caught in crossfire or shot accidentally.”
 
 ```{r}
