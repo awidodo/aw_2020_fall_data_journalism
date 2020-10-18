@@ -35,12 +35,24 @@ glimpse(fatal_shootings)
 “Since The Washington Post began tracking fatal shootings by police in 2015, officers have fatally shot 247 women out of the more than 5,600 people killed overall.”
 
 ```{r}
-#Shows the data starts from 2015
 fatal_shootings %>%
   arrange(date) %>%
   select(date)
+#The Washington Post's first data point is from January 2, 2015.
+```
+```{r}
+women_only_fatal_police_shootings <- fatal_shootings %>%
+  filter(gender == "F") %>%
+  count()
+women_only_fatal_police_shootings
+#250 women have be shot and killed by police sinve 2015.
+```
 
-
+```{r}
+total_fatal_police_shootings <- fatal_shootings %>%
+  count()
+total_fatal_police_shootings
+#There are 5680 records in the Post's data set, meaning that 5680 people have been shot and killed by police since the beginning of 2015. 
 ```
 
 
@@ -50,17 +62,6 @@ fatal_shootings %>%
 
 
 ```{r}
-
-fatal_shootings %>%
-  filter(race != "None") %>%
-  summarize(total_shootings = n())
-
-fatal_shootings %>%
-  filter(race == "B") %>%
-  filter(gender == "F") %>%
-  summarize(Black_women = n())
-
-
 fatal_shootings %>%
   filter(race != "None") %>%
   group_by(race, gender) %>%
@@ -71,9 +72,46 @@ fatal_shootings %>%
   select(race_gender, total_shootings) %>%
   pivot_wider(names_from = race_gender, values_from = total_shootings) %>%
   mutate(total_shootings = sum(c_across(`W-M`:`W-NA`))) %>%
-  select(total_shootings, `B-F`)
+  select(total_shootings, `B-F`) %>%
+  mutate(Black_female_proportion_of_fatal_shootings = `B-F`/total_shootings*100) %>%
+  select(Black_female_proportion_of_fatal_shootings)
   
-fatal_shootings
+```
+
+"... But within this small subset, Black women, who are 13 percent of the female population, account for 20 percent of the women shot and killed...
+
+```{r}
+fatal_shootings %>%
+  filter(gender == "F") %>%
+  group_by(race, gender) %>%
+  summarize(total_shootings = n()) %>%
+  arrange(desc(total_shootings)) %>%
+  mutate(race_gender = paste(race, gender, sep = "-")) %>%
+  ungroup() %>%
+  select(race_gender, total_shootings) %>%
+  pivot_wider(names_from = race_gender, values_from = total_shootings) %>%
+  mutate(total_shootings = sum(c_across(`W-F`:`O-F`))) %>%
+  select(total_shootings, `B-F`) %>%
+  mutate(Black_female_proportion_of_female_shootings = `B-F`/total_shootings*100) %>%
+  select(Black_female_proportion_of_female_shootings)
+```
+
+"and 28 percent of the unarmed deaths.”
+
+```{r}
+fatal_shootings %>%
+  filter(armed == "unarmed") %>%
+  filter(gender == "F") %>%
+  group_by(armed, race, gender) %>%
+  select(armed, race, gender) %>%
+  summarize(total_unarmed_shootings = n()) %>%
+  mutate(race_gender = paste(race, gender, sep = "-")) %>%
+  ungroup() %>%
+  select(race_gender, total_unarmed_shootings) %>%
+  pivot_wider(names_from = race_gender, values_from = total_unarmed_shootings) %>%
+  mutate(total_unarmed_shootings = sum(c_across(`B-F`:`NA-F`))) %>%
+  select(total_unarmed_shootings, `B-F`)
+
 ```
 
 ... But within this small subset, Black women, who are 13 percent of the female population, account for 20 percent of the women shot and killed and 28 percent of the unarmed deaths.”
@@ -117,10 +155,38 @@ women_percentage
 “Crenshaw said Black women’s deaths also may be dismissed as “collateral damage” if they are killed while police are pursuing someone else. Twenty of the 247 women were killed in that kind of situation, analysis shows. In 12 of those 20 shootings, police said the women killed were caught in crossfire or shot accidentally.”
 
 ```{r}
+#Option 1
+shootings_mental_health <- fatal_shootings %>%
+  filter(signs_of_mental_illness == "TRUE") %>%
+  group_by(gender) %>%
+  count() %>%
+  pivot_wider(names_from = gender, values_from = n) %>%
+  mutate(percent_women = `F`/250*100) %>%
+  mutate(percent_men = `M`/5429*100)
+  
+#The values for total men and women shot are known from Finding #3, however by entering those values into the formula myself I introduce potential for human error. Using this approach, I am not sure how to get those totals of men and women shot into the same data frame as the totals of mentally ill men and women shot. I tried another approach below.
+shootings_mental_health
+```
 
-types_of_death <- fatal_shootings %>%
-  group_by(manner_of_death) %>%
-  count()
-
-types_of_death
+```{r}
+#Option 2
+#Group by gender to get totals.
+number_gender <- fatal_shootings %>%
+  group_by(gender) %>%
+  count() %>%
+  rename(gender_total = n)
+number_gender 
+#Filter for mental illness and group by gender.
+shootings_mental_illness_gender <- fatal_shootings %>%
+  filter(signs_of_mental_illness == "TRUE") %>%
+  group_by(gender) %>%
+  count() %>%
+  rename(mental_illness_total = n)
+shootings_mental_illness_gender
+#Join the new data frames and add a column that calculates percentage.
+shootings_mental_illness_percentage <- shootings_mental_illness_gender %>%
+  inner_join(number_gender) %>%
+  mutate(gender_percent = mental_illness_total/gender_total*100)
+shootings_mental_illness_percentage
+#While this approach is accurate, I doubt it is the most efficient method.
 ```
