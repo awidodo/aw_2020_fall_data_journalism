@@ -38,7 +38,7 @@ library(tidyverse)
 
 # Load janitor
 # If you need to install it, run this code
-# install.packages('janitor')
+install.packages('janitor')
 library(janitor)
 
 ```
