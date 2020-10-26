@@ -98,6 +98,10 @@ glimpse(opioid_scrape)
 opioid_scrape
 
 # What flaws did you see?
+#The titles for the columns are hard to read and understand.
+#There are some states that do not have any data in the columns because it didn't meet the criteria and it is filled with an *
+#There is a row designated to establish a criteria 
+
 
 ```
 
