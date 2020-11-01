@@ -84,7 +84,9 @@ Q: How many deaths are there in the county with FIPS code 24003 -- Anne Arundel?
 
 ```{r}
 county_covid_deaths_dirty %>%
-  filter(FIPS code !, == 24003)
+  filter(`FIPS code !,` == 24003)
+
+#Because the data is dirty it won't work. Column name is correct. Fix put it in tik marks.` `
 ```
 
 Q: How many counties are in Maryland?
@@ -100,7 +102,6 @@ Q: How many total deaths are there in Maryland?
 ```{r}
 county_covid_deaths_dirty %>%
   summarize(total_deaths = sum(deaths))
-
 ```
 
 ## Flaws
@@ -124,6 +125,7 @@ Note: as we make changes, we're going to save our changes in a new dataframe, ca
 ```{r}
 county_covid_deaths <- county_covid_deaths_dirty %>%
   clean_names()
+#clean_names janitor package takes all the columns names and looks to see if there's special characters and removes them
 
 county_covid_deaths
 
@@ -239,7 +241,7 @@ county_covid_deaths <- county_covid_deaths_dirty %>%
     TRUE ~ deaths
   )) %>%
   mutate(deaths = as.numeric(deaths))
-
+#converting column: character to a numerical value  
 county_covid_deaths
 ```
 Let's try answering our question again.
@@ -275,7 +277,7 @@ county_covid_deaths <- county_covid_deaths_dirty %>%
   )) %>%
   mutate(deaths = as.numeric(deaths)) %>%
   mutate(deaths = replace_na(deaths, 0))
-
+#replacing na means that it equals 0
 county_covid_deaths
 ```
 Let's try answering our question again.
