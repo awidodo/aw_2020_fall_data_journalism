@@ -1,0 +1,21 @@
+---
+title: "analysis.rmd"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Load Libraries
+
+```{r cars}
+library(tidyverse)
+```
+ 
+## code
+
+```{r}
+read_csv("whose_heritage.csv") ->
+  whose_heritage
+```
