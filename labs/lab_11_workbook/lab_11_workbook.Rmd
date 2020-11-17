@@ -248,7 +248,7 @@ Create a code block below, and create a bar chart showing the increase in case r
 ```{r}
 
 baltimorecity <- maryland %>%
-  filter(county == "Baltimore")
+  filter(county == "Baltimore", month %in% c("May", "June", "July", "August"))
 
 baltimorecity %>%
   ggplot(aes(month, case_rate)) +
