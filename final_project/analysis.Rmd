@@ -16,6 +16,6 @@ library(tidyverse)
 ## code
 
 ```{r}
-read_csv("whose_heritage.csv") ->
-  whose_heritage
+read_csv("data/whose_heritage.csv") ->
+  heritage
 ```
