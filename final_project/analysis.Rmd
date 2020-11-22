@@ -11,11 +11,59 @@ knitr::opts_chunk$set(echo = TRUE)
 
 ```{r cars}
 library(tidyverse)
+library(janitor)
 ```
  
 ## code
 
 ```{r}
-read_csv("data/whose_heritage.csv") ->
-  heritage
+heritage <- read_csv("data/whose_heritage.csv") %>%
+  clean_names()
+  
+```
+```{r}
+#When did monuments go up in SC? 
+
+heritage %>%
+  filter(state == "SC") %>%
+  filter(symbol_type == "Monument") %>%
+  group_by(year_dedicated) %>%
+  count() %>%
+  mutate(decade = round(year_dedicated,-1)) %>%
+  group_by(decade) %>%
+  summarise(total_monuments = sum(n))
+```
+
+```{r}
+#What groups are responsible for putting up these monuments?
+
+```
+
+
+ After the massacre in SC in 2015, a national effort to take down monuments popped up across the country. It's had more impact across the US.  What has happened in SC?
+
+```{r}
+heritage %>%
+  filter(state == "SC") %>%
+  filter(symbol_type == "Monument") %>%
+  group_by(year_dedicated) %>%
+  count() %>%
+  mutate(decade = round(year_dedicated,-1)) %>%
+  group_by(decade) %>%
+  summarise(total_monuments = sum(n))
+```
+
+* How many statues remain on public land vs private land?  Is there something uniquely challenging about private land?
+```{r}
+heritage %>%
+    filter(symbol_type == "Monument") %>%
+    group_by(symbol_type, symbol_category) %>%
+    count() %>%
+    arrange(symbol_type, symbol_category)
+```
+
+```{r}
+monument <- heritage %>% 
+  filter(symbol_type == "Monument") %>%
+  filter(symbol_category == "Monument")
 ```
