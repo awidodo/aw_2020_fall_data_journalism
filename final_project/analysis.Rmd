@@ -117,12 +117,3 @@ monument <- heritage %>%
   filter(symbol_category == "Monument")
 ```
 
-
-
-
-```{r}
-```
-
-
-
-
