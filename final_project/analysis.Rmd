@@ -66,7 +66,7 @@ Are schools named after confederate leaders over representative of African Ameri
 heritage_schools <- heritage %>%
   filter(symbol_type == "School") %>%
   rename(sch_name = feature_name) %>%
-  rename(stabr = state) %>%
+  rename(stabr = state) 
 	
 ```
 county name/school district 
