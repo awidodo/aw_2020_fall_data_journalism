@@ -56,84 +56,16 @@ heritage_schools_race <- heritage_schools_crosswalk %>%
 glimpse(heritage_schools_race)
 ```
 
-
-###Notes: <a href= "https://www.edweek.org/ew/section/multimedia/data-the-schools-named-after-confederate-figures.html"> Schools named after confederate leaders</a> What is the racial makeup of these schools?  Colleges named after confederate leaders?  And racial makeup of those colleges?  What is the racial makeup of the counties or census tracts where these statues are located? 
-Are schools named after confederate leaders over representative of African American populations?
-
-
-
+#Question 1
+#Below is Sidney Lanier High School in Montgomery, Alabama. The school is named after confederate Sidney Lanier and the school's population is more than 99% Black. What year was the school dedicated?
 ```{r}
-heritage_schools <- heritage %>%
-  filter(symbol_type == "School") %>%
-  rename(sch_name = feature_name) %>%
-  rename(stabr = state) 
-	
+pctblack <- heritage_schools_race %>%
+  arrange(desc(pct_black))%>%
+  select(heritage_sch_name, pct_black, year_dedicated) %>%
+  filter(str_detect(heritage_sch_name,"pending"))
+
+pctblack
 ```
-county name/school district 
-
-```{r}
-join <- heritage_schools %>%
-  inner_join(schools_race, by = c("sch_name" , "stabr"))
-```
-```{r}
 ```
 
-## Exploratory Analysis
-
-
-
-```{r}
-heritage %>%
-  group_by(symbol_category, symbol_type, state) %>%
-  count() %>%
-  arrange(desc(n))
-```
-
-
-```{r}
-heritage %>%
-  group_by(year_removed) %>%
-  count() %>%
-  arrange(desc(year_removed))
-```
-
-```{r}
-heritage %>%
-  group_by(state) %>%
-  count() %>%
-  arrange(desc(n))
-```
-
-```{r}
-heritage %>%
-  group_by(year_dedicated) %>%
-  count() %>%
-  arrange(desc(n))
-```
-###Notes:  After the massacre in SC in 2015, a national effort to take down monuments popped up across the country.  It's had more impact across the US.  What has happened in SC? South Carolina has done little rleatively to other places, total monuments in SC compared to other states, % of monuments removed inSC compared to other states, less than 1% of symbols removed in SC compared to other states. When did monuments go up in SC? What groups responsible, for putting up monuments?
-
-```{r}
-heritage %>%
-  filter(state == "SC") %>%
-  filter(symbol_type == "Monument") %>%
-  group_by(year_dedicated) %>%
-  count() %>%
-  mutate(decade = round(year_dedicated,-1)) %>%
-  group_by(decade) %>%
-  summarise(total_monuments = sum(n))
-```
-###Notes: How many statues remain on public land vs private land?  Is there something uniquely challenging about private land?
-```{r}
-heritage %>%
-    filter(symbol_type == "Monument") %>%
-    group_by(symbol_type, symbol_category) %>%
-    count() %>%
-    arrange(symbol_type, symbol_category)
-```
-
-```{r}
-monument <- heritage %>% 
-  filter(symbol_type == "Monument") %>%
-  filter(symbol_category == "Monument")
-```
 
